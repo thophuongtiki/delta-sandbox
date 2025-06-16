@@ -135,7 +135,8 @@ def _(form):
 
 
 @app.cell
-def _(form, pl, read_data):
+def _(form, mo, pl, read_data):
+    mo.stop(form.value is None, mo.md("**Submit the form to continue.**"))
     event_df = pl.DataFrame()
     product_df = pl.DataFrame()
 
@@ -144,7 +145,7 @@ def _(form, pl, read_data):
 
     if len(filtered_subcates) != 0 and len(filtered_events) > 0 :
         product_df, event_df = read_data(subcates=filtered_subcates, events=[filtered_events])
-    
+
     return (product_df,)
 
 
